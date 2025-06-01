@@ -9,7 +9,7 @@ import cors from "cors";
 
 const app=express();
 app.use(cors({
-  origin: "https://medley-logs.onrender.com", 
+  origin: "https://medley-logs-j5xp.vercel.app", 
   credentials: true
 }));
 
