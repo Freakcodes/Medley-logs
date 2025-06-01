@@ -9,7 +9,7 @@ import cors from "cors";
 
 const app=express();
 app.use(cors({
-  origin: "http://localhost:5173", // Or use process.env.CLIENT_URL
+  origin: "https://medley-logs.onrender.com", 
   credentials: true
 }));
 
