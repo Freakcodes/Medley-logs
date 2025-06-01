@@ -16,6 +16,7 @@
     "axios": "^1.9.0",
     "date-fns": "^4.1.0",
     "dompurify": "^3.2.5",
+    "imagekitio-react": "^4.3.0",
     "lucide-react": "^0.509.0",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
@@ -23,9 +24,7 @@
     "react-quill": "^2.0.0",
     "react-quill-new": "^3.4.6",
     "react-router-dom": "^7.6.0",
-    "react-toastify": "^11.0.5",
-    "imagekitio-react": "^2.0.3"
-
+    "react-toastify": "^11.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.13.0",
