@@ -7,14 +7,19 @@ import PostSkeleton from "../components/PostSkeleton";
 import { useAuth } from "@clerk/clerk-react";
 const SavedPosts = () => {
     const {isSignedIn}=useAuth();
-   
+    
     
   const fetchMyPosts = async () => {
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/get-saved-posts`, {
-      withCredentials: true, // required for Clerk auth
-    });
-    return res.data;
-  };
+  const token = await getToken();
+
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/get-saved-posts`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return res.data;
+};
   
   
   let { data: posts, isLoading, isError,error} = useQuery({

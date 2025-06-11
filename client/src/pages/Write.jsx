@@ -39,6 +39,7 @@ const Write = () => {
   const { register, handleSubmit, reset } = useForm();
   const [content, setContent] = useState("");
   const [coverImage, setCoverImage] = useState(null);
+  const navigate=useNavigate();
   const mutation = useMutation({
     mutationFn: async (data) => {
       const token = await getToken();

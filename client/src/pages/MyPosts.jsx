@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 import PostSkeleton from "../components/PostSkeleton";
 import { useAuth } from "@clerk/clerk-react";
 const MyPosts = () => {
-    const {isSignedIn,getToken}=useAuth();
-    const token= getToken().then((e)=>console.log(e));
-    console.log(token);
-    
+    const {getToken}=useAuth();
   const fetchMyPosts = async () => {
+    const token=await getToken();
     const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/myposts`, {
-      withCredentials: true, // required for Clerk auth
+       headers: {
+      Authorization: `Bearer ${token}`,
+    }, // required for Clerk auth
     });
     return res.data;
   };
