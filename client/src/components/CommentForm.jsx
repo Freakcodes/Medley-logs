@@ -4,13 +4,14 @@ import axios from "axios";
 import { useAuth } from "@clerk/clerk-react";
 const CommentForm = ({ slug }) => {
   const {getToken}=useAuth();
-  const token=getToken();
+  
   const [desc, setDesc] = useState("");
   const queryClient = useQueryClient();
 
   const { mutate, isPending, isError, error } = useMutation({
 
     mutationFn: async (newComment) => {
+      const token=await getToken();
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/comments/${slug}`,
         newComment,

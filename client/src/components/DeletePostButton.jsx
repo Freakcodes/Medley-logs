@@ -9,10 +9,11 @@ import { useAuth } from '@clerk/clerk-react';
 
 export default function DeletePostButton({ slug }) {
   const {getToken}=useAuth();
-  const token=getToken();
+  
   const [ del, setDel] = useState(false);
   const navigate=useNavigate();
   const deletePost = async () => {
+    const token=await getToken();
     const res = await axios.delete(
       `${import.meta.env.VITE_API_URL}/posts/${slug}`,
      
