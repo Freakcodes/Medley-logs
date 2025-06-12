@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-
+import { useAuth } from "@clerk/clerk-react";
 const CommentForm = ({ slug }) => {
+  const {getToken}=useAuth();
+  const token=getToken();
   const [desc, setDesc] = useState("");
   const queryClient = useQueryClient();
 
   const { mutate, isPending, isError, error } = useMutation({
+
     mutationFn: async (newComment) => {
       const res = await axios.post(
         `${import.meta.env.VITE_API_URL}/comments/${slug}`,
         newComment,
-        { withCredentials: true } // if needed for cookies/auth
+       {
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+       }// if needed for cookies/auth
       );
       return res.data;
     },

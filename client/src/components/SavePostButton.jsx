@@ -1,17 +1,23 @@
-import { useMutation } from '@tanstack/react-query';
-import { useState } from 'react';
-import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { Bookmark,BookmarkCheck } from 'lucide-react';
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Bookmark, BookmarkCheck } from "lucide-react";
+import { useAuth } from "@clerk/clerk-react";
 export default function SavePostButton({ slug }) {
   const [saved, setSaved] = useState(false);
-
+  const { getToken } = useAuth();
+  const token = getToken();
   const savePost = async () => {
     const res = await axios.post(
       `${import.meta.env.VITE_API_URL}/users/save-post/${slug}`,
       {},
-      { withCredentials: true }
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
     );
     return res.data;
   };
@@ -38,9 +44,12 @@ export default function SavePostButton({ slug }) {
         onClick={() => mutate()}
         disabled={isPending || saved}
         className={`px-4 py-2 rounded-md text-sm font-medium transition 
-          ${saved ? 'bg-gray-500 text-white' : 'bg-gray-500 text-white hover:bg-gray-600'} 
+          ${
+            saved
+              ? "bg-gray-500 text-white"
+              : "bg-gray-500 text-white hover:bg-gray-600"
+          } 
           disabled:opacity-50 disabled:cursor-not-allowed`}
-        
       >
         {isPending ? (
           <div className="flex items-center gap-2">
@@ -63,12 +72,11 @@ export default function SavePostButton({ slug }) {
                 d="M4 12a8 8 0 018-8v4l4-4-4-4v4a12 12 0 00-12 12h4z"
               ></path>
             </svg>
-            
           </div>
         ) : saved ? (
-          <BookmarkCheck/>
+          <BookmarkCheck />
         ) : (
-          <Bookmark/>
+          <Bookmark />
         )}
       </button>
       <ToastContainer position="top-center" autoClose={2000} />
