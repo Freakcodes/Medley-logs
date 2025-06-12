@@ -6,7 +6,7 @@ import PostSkeleton from "../components/PostSkeleton";
 import { useAuth } from "@clerk/clerk-react";
 const MyPosts = () => {
     const {getToken}=useAuth();
-  const fetchMyPosts = async () => {
+    const fetchMyPosts = async () => {
     const token=await getToken();
     const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/myposts`, {
        headers: {

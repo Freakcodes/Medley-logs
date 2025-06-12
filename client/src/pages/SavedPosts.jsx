@@ -6,9 +6,7 @@ import { Link } from "react-router-dom";
 import PostSkeleton from "../components/PostSkeleton";
 import { useAuth } from "@clerk/clerk-react";
 const SavedPosts = () => {
-    const {isSignedIn,getToken}=useAuth();
-    
-    
+  const {getToken}=useAuth();
   const fetchMyPosts = async () => {
   const token = await getToken();
 
@@ -23,10 +21,9 @@ const SavedPosts = () => {
   
   
   let { data: posts, isLoading, isError,error} = useQuery({
-    queryKey: ["myPosts"],
+    queryKey: ["savedPosts"],
     queryFn: fetchMyPosts,
   });
-
   
   posts=posts?.savedPosts;
   return (

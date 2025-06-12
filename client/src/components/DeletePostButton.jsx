@@ -5,16 +5,21 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Navigate,useNavigate } from 'react-router-dom';
 import { Trash2 } from 'lucide-react';
-
+import { useAuth } from '@clerk/clerk-react';
 
 export default function DeletePostButton({ slug }) {
+  const {getToken}=useAuth();
+  const token=getToken();
   const [ del, setDel] = useState(false);
   const navigate=useNavigate();
   const deletePost = async () => {
     const res = await axios.delete(
       `${import.meta.env.VITE_API_URL}/posts/${slug}`,
      
-      { withCredentials: true }
+      { headers: {
+        Authorization:`Bearer ${token}` 
+      }
+      }
     );
     return res.data;
   };
