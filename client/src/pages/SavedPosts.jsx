@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import PostSkeleton from "../components/PostSkeleton";
 import { useAuth } from "@clerk/clerk-react";
 const SavedPosts = () => {
-    const {isSignedIn}=useAuth();
+    const {isSignedIn,getToken}=useAuth();
     
     
   const fetchMyPosts = async () => {

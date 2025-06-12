@@ -51,7 +51,7 @@ const Write = () => {
       });
       onSuccess: (data, variables) => {
     const slug = variables.slug; // from postData
-    navigate(`/posts/${slug}`);
+    
   },
       console.log(res);
       return res;
