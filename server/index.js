@@ -9,9 +9,11 @@ import cors from "cors";
 
 const app=express();
 app.use(cors({
-  origin: "https://medley-logs-j5xp.vercel.app", 
+  origin: ["https://medley-logs-j5xp.vercel.app","http://localhost:5173"], 
   credentials: true
-}));
+}
+
+));
 
 app.use("/webhooks",webHookRouter);
 app.use(clerkMiddleware());
