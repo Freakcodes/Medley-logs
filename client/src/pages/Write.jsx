@@ -93,7 +93,7 @@ const Write = () => {
     reset(); 
     setContent('');
     setCoverImage(null);
-    navigate(`/my`)
+    navigate(`/myposts`)
   };
 
   // const handleImageUpload = (e) => {
