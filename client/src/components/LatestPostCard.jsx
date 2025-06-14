@@ -8,7 +8,8 @@ const LatestPostCard = ({ data }) => {
         <img
           src={data.img}
           alt={data.title}
-          className="w-full h-50 object-cover rounded-b-none"
+          className="w-full h-[500px] object-cover"
+          // width={10}
         />
         <div className="p-5">
           <div className="text-sm uppercase font-semibold text-indigo-600 mb-1">
@@ -17,7 +18,7 @@ const LatestPostCard = ({ data }) => {
           <h2 className="text-2xl font-bold text-gray-800 mb-3 line-clamp-1">
             {data.title}
           </h2>
-          <p className="text-gray-600 mb-4 line-clamp-3">{data.desc}</p>
+          <p className="text-gray-600 mb-4 line-clamp-1">{data.desc}</p>
           <div className="flex justify-between">
             <div className="text-xs text-gray-500">
               Posted on {new Date(data.createdAt).toLocaleDateString()}

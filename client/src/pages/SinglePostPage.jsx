@@ -11,8 +11,9 @@ import SavePostButton from "../components/SavePostButton";
 import DeletePostButton from "../components/DeletePostButton";
 import { useAuth,useUser } from "@clerk/clerk-react";
 const SinglePostPage = () => {
-  const { slug } = useParams();
+  const { slug, } = useParams();
   const user=useUser();
+  
   const username=user.user?.username;
   const currentUserId=user.user?.isSignedIn;
   
@@ -49,7 +50,7 @@ const SinglePostPage = () => {
       <h1 className="text-3xl font-bold text-gray-800 mb-2">{post.title}</h1>
       <div className="flex gap-4">
         {
-          currentUserId &&  <SavePostButton slug={slug}/>
+          username &&  <SavePostButton slug={slug}/>
         }
        
       {

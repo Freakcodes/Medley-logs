@@ -11,19 +11,16 @@ import { useEffect } from "react";
 export const Navbar = () => {
   //lets design navbar
   const [open, setOpen] = useState(false);
-  const {getToken,isSignedIn}=useAuth();
+  const { getToken, isSignedIn } = useAuth();
 
-  useEffect(()=>{
-    // getToken().then((token)=>{
-    //   console.log(token);
-    // })
-  },[])
-  
   return (
-    <div className=" flex items-center justify-between">
-      <h1 className=" text-lg xl:text-2xl 2xl:text-2xl font-bold">
+    <div className=" flex items-center justify-between overflow-x-hidden">
+      <Link
+        className=" text-lg xl:text-2xl 2xl:text-2xl font-bold font-sans cursor-pointer"
+        to="/"
+      >
         Medley-Logs
-      </h1>
+      </Link>
       {/* Mobile Menu */}
       <div className="md:hidden">
         <div
@@ -34,14 +31,15 @@ export const Navbar = () => {
         >
           {open ? "X" : "≡"}
         </div>
-        <div
-          className={`w-full h-screen flex flex-col items-center justify-center gap-16 absolute top-16 bg-[#e6e6ff] transition-all ease-in-out ${
-            open ? "right-0" : "right-[-100%]"
+        {
+          open && <div
+          className={`w-full h-screen flex flex-col items-center justify-center gap-16 absolute top-16 left-0 bg-[#e6e6ff] transition-transform duration-300 ease-in-out transform ${
+            open ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <Link to="/">Home</Link>
-          {isSignedIn && <Link to="/">MyPosts</Link>}
-          <Link to="/">Most Popular</Link>
+          <Link to="/" onClick={()=>(setOpen(!open))} >Home</Link>
+          {isSignedIn && <Link to="/myposts" onClick={()=>(setOpen(!open))}>MyPosts</Link>}
+          <Link to="/saved-posts" onClick={()=>(setOpen(!open))} >Saved Posts</Link>
           <SignedOut>
             {/* <SignInButton/> */}
             <Link
@@ -55,15 +53,16 @@ export const Navbar = () => {
             <UserButton />
           </SignedIn>
         </div>
+        }
+        
       </div>
       {/* Desktop Menu */}
       <div className="hidden md:flex font-medium">
         <div className="flex gap-20">
           <Link to="/">Home</Link>
           <Link to="/posts"> Read Posts</Link>
-           {isSignedIn && <Link to="/myposts">MyPosts</Link>}
-           {isSignedIn && <Link to="/saved-posts">Saved Posts</Link>}
-
+          {isSignedIn && <Link to="/myposts">MyPosts</Link>}
+          {isSignedIn && <Link to="/saved-posts">Saved Posts</Link>}
 
           <SignedOut>
             {/* <SignInButton/> */}

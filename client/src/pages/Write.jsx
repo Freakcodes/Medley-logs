@@ -134,6 +134,7 @@ const Write = () => {
               useUniqueFileName={true}
               // isPrivateFile={false}
               onSuccess={handleSuccess}
+              required={true}
             />
           </IKContext>
             {/* <input

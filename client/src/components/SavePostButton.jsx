@@ -8,8 +8,9 @@ import { useAuth } from "@clerk/clerk-react";
 export default function SavePostButton({ slug }) {
   const [saved, setSaved] = useState(false);
   const { getToken } = useAuth();
-  const token = getToken();
   const savePost = async () => {
+      const token =await getToken();
+
     const res = await axios.post(
       `${import.meta.env.VITE_API_URL}/users/save-post/${slug}`,
       {},
