@@ -10,8 +10,9 @@ import CommentShow from "../components/CommentShow";
 import SavePostButton from "../components/SavePostButton";
 import DeletePostButton from "../components/DeletePostButton";
 import { useAuth,useUser } from "@clerk/clerk-react";
+import UpdatePostButton from "../components/UpdatePostButton";
 const SinglePostPage = () => {
-  const { slug, } = useParams();
+  const { slug } = useParams();
   const user=useUser();
   
   const username=user.user?.username;
@@ -55,6 +56,9 @@ const SinglePostPage = () => {
        
       {
         post.createdBy===username && <DeletePostButton slug={slug}/>
+      }
+      {
+        post.createdBy===username && <UpdatePostButton slug={slug}/>
       }
       </div>
       

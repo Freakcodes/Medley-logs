@@ -13,6 +13,7 @@ import { ClerkProvider } from '@clerk/clerk-react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import MyPosts from './pages/MyPosts.jsx'
 import SavedPosts from './pages/SavedPosts.jsx'
+import Update from './pages/Update.jsx'
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
 if (!PUBLISHABLE_KEY) {
@@ -54,6 +55,10 @@ const router=createBrowserRouter([
   {
     path:"/saved-posts",
     element:<SavedPosts/>
+  },
+  {
+    path:"/update-posts/:slug",
+    element:<Update/>
   }
   ]
  }
