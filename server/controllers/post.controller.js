@@ -59,11 +59,7 @@ export const createPost=async(req,res)=>{
 
 export const deletePost = async (req, res) => {
   const clerkUserId = req.auth.userId;
-    console.log(clerkUserId);
     
-//   if (!clerkUserId) {
-//     return res.status(401).json("Not authenticated");
-//   }
 
   try {
     const user = await User.findOne({ clerkUserId });
@@ -74,7 +70,7 @@ export const deletePost = async (req, res) => {
     const deletedPost = await Post.findOneAndDelete({
       slug: req.params.slug,
       user: user._id,
-    });
+    });  
 
     if (!deletedPost) {
       return res.status(403).json("Post not deleted due to some error");
@@ -97,4 +93,28 @@ export const uploadAuth=async(req,res)=>
 {
     var results=imagekit.getAuthenticationParameters();
     res.send(results);
+}
+
+export const updatePost=async (req,res)=>{
+  const clerkUserId = req.auth.userId;
+  const user = await User.findOne({ clerkUserId });
+  if(!user){
+   return res.status(401).json({message:"You are not authorized to update this blog.."});
+  }
+  try{
+     const updatedPost= await Post.findOneAndUpdate(
+      { slug:req.params.slug,user:user._id},
+      {
+        user:user._id,createdBy:user.username,
+        ...req.body
+      },
+      { new: true, runValidators: true }
+     )
+     if (!updatedPost) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+    res.status(200).json(updatedPost);
+  }catch(err){
+    res.status(500).json({message:err.message})
+  }
 }
