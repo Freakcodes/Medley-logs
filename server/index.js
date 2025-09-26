@@ -26,10 +26,10 @@ app.use(express.json());
 //     "Origin, X-Requested-With, Content-Type, Accept");
 //   next();
 // });
-// app.listen(3000,()=>{
-//   console.log("Up and running");
+app.listen(3000,()=>{
+  console.log("Up and running");
     
-// })
+})
 app.use("/users",userRouter);
 app.use("/posts",postRouter);
 app.use("/comments",commentRouter);
