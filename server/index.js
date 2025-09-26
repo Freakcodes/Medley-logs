@@ -8,6 +8,7 @@ import { clerkMiddleware } from '@clerk/express'
 import cors from "cors";
 
 const app=express();
+connectDB();
 app.use(cors({
   origin: ["https://medley-logs-j5xp.vercel.app","http://localhost:5173"], 
   credentials: true
@@ -25,10 +26,10 @@ app.use(express.json());
 //     "Origin, X-Requested-With, Content-Type, Accept");
 //   next();
 // });
-app.listen(3000,()=>{
-  console.log("Up and running");
-    connectDB();
-})
+// app.listen(3000,()=>{
+//   console.log("Up and running");
+    
+// })
 app.use("/users",userRouter);
 app.use("/posts",postRouter);
 app.use("/comments",commentRouter);
